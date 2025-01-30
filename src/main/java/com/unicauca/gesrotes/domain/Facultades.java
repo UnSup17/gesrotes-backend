@@ -1,12 +1,13 @@
 package com.unicauca.gesrotes.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -15,19 +16,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Alimentacion")
-public class Alimentacion {
+@Table(schema = "GESROTES", name = "FACULTADES")
+public class Facultades {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "OID")
   private Long id;
 
-  // Table that contains the bits of foods assigned to each meal record
-  @Column
-  private String comidas;
+  @Column(name = "NOMBRE")
+  private String nombre;
 
-  @ManyToOne
-  @JoinColumn(name = "jornada")
-  private Jornada jornada;
+  @Column(name = "UBICACION")
+  private String ubicacion;
+
+  @OneToMany(mappedBy = "facultad")
+  private List<Programas> programas;
+
 }

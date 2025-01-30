@@ -1,7 +1,7 @@
 package com.unicauca.gesrotes.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,15 +15,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "ContactosProgramas")
-public class ContactoPrograma {
+@Table(schema = "GESROTES", name = "SERVICIOS")
+public class Servicios {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "OID")
   private Long id;
-  private String telefono;
-  private String correo;
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_id_programas")
-  private Programa programa;
+
+  @Column(name = "DESCRIPCION")
+  private String descripcion;
+
+  @ManyToOne
+  @JoinColumn(name = "ESCENARIO")
+  private Escenarios escenario;
+
 }

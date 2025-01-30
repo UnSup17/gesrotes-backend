@@ -3,7 +3,6 @@ package com.unicauca.gesrotes.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,24 +18,24 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Turnos")
-public class Turno {
+@Table(schema = "GESROTES", name = "Turnos")
+public class Turnos {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   @Temporal(TemporalType.DATE)
   private Date dia;
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "fk_id_jornadas")
-  private Jornada jornada;
-  @ManyToOne(fetch = FetchType.LAZY)
+  private Jornadas jornada;
+  @ManyToOne
   @JoinColumn(name = "fk_id_etiquetas")
-  private Etiqueta etiqueta;
-  @ManyToOne(fetch = FetchType.LAZY)
+  private Etiquetas etiqueta;
+  @ManyToOne
   @JoinColumn(name = "fk_id_escenarios")
-  private Escenario escenario;
-  @ManyToOne(fetch = FetchType.LAZY)
+  private Escenarios escenario;
+  @ManyToOne
   @JoinColumn(name = "fk_id_estudiantestu")
-  private Estudiante estudiante;
+  private Estudiantes estudiante;
 }

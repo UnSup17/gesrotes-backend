@@ -2,7 +2,6 @@ package com.unicauca.gesrotes.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,18 +10,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Etiquetas")
-public class Etiqueta {
+@Table(schema = "GESROTES", name = "ETIQUETAS")
+public class Etiquetas {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id_etiquetas")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "OID")
   private Long id;
 
-  @Column
+  @Column(name = "DESCRIPCION")
   private String descripcion;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_id_escenarioseti")
-  private Escenario escenario;
+  @ManyToOne
+  @JoinColumn(name = "ESCENARIO")
+  private Escenarios escenario;
+
+  @ManyToOne
+  @JoinColumn(name = "SERVICIO")
+  private Servicios servicio;
 }

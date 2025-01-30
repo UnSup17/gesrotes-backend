@@ -36,4 +36,3 @@ build/
 .mvn/
 
 ### DIRS PROJECT ###
-src/main/resources/

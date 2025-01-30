@@ -1,6 +1,5 @@
 package com.unicauca.gesrotes.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,31 +17,24 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Escenarios")
-public class Escenario {
+@Table(schema = "GESROTES", name = "ESCENARIOS")
+public class Escenarios {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id_escenarios")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "OID")
   private Long id;
+
+  @Column(name = "NOMBRE")
   private String nombre;
+
+  @Column(name = "DIRECCION")
   private String direccion;
-  @OneToMany(mappedBy = "escenario", cascade = CascadeType.ALL)
-  private List<Servicio> servicios;
-  @OneToMany(mappedBy = "escenario", cascade = CascadeType.ALL)
-  private List<Etiqueta> etiquetas;
 
-  public void agregarServicio(Servicio servicio) {
-    if (this.servicios == null) {
-      this.servicios = new ArrayList<>();
-    }
-    this.servicios.add(servicio);
-  }
+  @OneToMany(mappedBy = "escenario", cascade = CascadeType.ALL)
+  private List<Servicios> servicios;
 
-  public void agregarEtiqueta(Etiqueta etiqueta) {
-    if (this.etiquetas == null) {
-      this.etiquetas = new ArrayList<>();
-    }
-    this.etiquetas.add(etiqueta);
-  }
+  @OneToMany(mappedBy = "escenario", cascade = CascadeType.ALL)
+  private List<Etiquetas> etiquetas;
+
 }

@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,25 +17,30 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Jornadas")
-public class Jornada {
+@Table(schema = "GESROTES", name = "JORNADAS")
+public class Jornadas {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id_jornadas")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "OID")
   private Long id;
+
+  @Column(name = "DESCRIPCION")
   private String descripcion;
-  @Temporal(TemporalType.TIME)
-  @Column(name = "horainicio")
+
+  @Column(name = "HORAINICIO")
   private Date horaInicio;
-  @Temporal(TemporalType.TIME)
-  @Column(name = "horafin")
+
+  @Column(name = "HORAFIN")
   private Date horaFin;
-  @Column
-  private Double duracion;
-  @Column
+
+  @Column(name = "DURACION")
+  private int duracion;
+
+  @Column(name = "VIGENCIA")
   private Date vigencia;
 
   @OneToMany(mappedBy = "jornada")
-  private List<Alimentacion> alimentaciones;
+  private List<Alimentaciones> alimentaciones;
+
 }

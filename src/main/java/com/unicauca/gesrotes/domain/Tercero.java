@@ -16,8 +16,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Personas")
-public class Persona {
+@Table(schema = "ACADEMICO", name = "TERCEROS")
+public class Tercero {
 
   @Id
   private Long identificacion;
@@ -34,7 +34,7 @@ public class Persona {
   private String tipoSangre;
   @Column(name = "lugarnacimiento")
   private String lugarNacimiento;
-  @OneToOne(mappedBy = "persona")
-  private Estudiante estudiante;
+  @OneToOne(mappedBy = "tercero")
+  private Estudiantes estudiante;
 
 }

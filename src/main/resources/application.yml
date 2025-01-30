@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: gesrotes-backend
+  datasource:
+    url: ${SIMCA_DATASOURCE_URL}
+    username: ${SIMCA_DATASOURCE_USER}
+    password: ${SIMCA_DATASOURCE_PASSWORD}
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    properties:
+      hibernate:
+        showsql: true
+        usesqlcomments: true
+        formatsql: true
+        dialect: org.hibernate.dialect.OracleDialect
+  jackson:
+    serialization:
+      fail-on-empty-beans: false

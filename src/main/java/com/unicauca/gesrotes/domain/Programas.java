@@ -2,27 +2,27 @@ package com.unicauca.gesrotes.domain;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+@Table(schema = "ACADEMICO", name = "PROGRAMAS")
 @Getter
 @Setter
+@ToString
 @Entity
-@Table(schema = "GESROTES", name = "PROGRAMAS")
 public class Programas {
-
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "OID")
   private Long id;
 
@@ -34,9 +34,11 @@ public class Programas {
 
   @ManyToOne
   @JoinColumn(name = "FACULTAD")
+  @JsonManagedReference
   private Facultades facultad;
 
   @OneToMany(mappedBy = "programa")
+  @JsonBackReference
   private List<Materias> materias;
 
   @OneToMany(mappedBy = "programa")

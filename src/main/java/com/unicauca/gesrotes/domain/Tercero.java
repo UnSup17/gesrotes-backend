@@ -1,15 +1,17 @@
 package com.unicauca.gesrotes.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,20 +22,23 @@ import lombok.Setter;
 public class Tercero {
 
   @Id
-  private Long identificacion;
-  private String nombre;
-  private String apellido;
+  private String identificacion;
+  private String primernombre;
+  private String segundonombre;
+  private String primerapellido;
+  private String segundoapellido;
   private String telefono;
-  private String correo;
+  private String email;
   private String direccion;
   private String genero;
   @Temporal(TemporalType.DATE)
-  private Date fechaNacimiento;
-  private String clave;
-  @Column(name = "tiposangre")
-  private String tipoSangre;
-  @Column(name = "lugarnacimiento")
-  private String lugarNacimiento;
+  private Date nacimiento;
+
+  @ManyToOne
+  @JoinColumn(name = "RH")
+  @JsonManagedReference
+  private FactorRH factorRh;
+
   @OneToOne(mappedBy = "tercero")
   private Estudiantes estudiante;
 

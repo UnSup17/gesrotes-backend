@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "GESROTES", name = "Turnos")
-public class Turnos {
+public class Turno {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,14 +28,14 @@ public class Turnos {
   private Date dia;
   @ManyToOne
   @JoinColumn(name = "fk_id_jornadas")
-  private Jornadas jornada;
+  private Jornada jornada;
   @ManyToOne
   @JoinColumn(name = "fk_id_etiquetas")
-  private Etiquetas etiqueta;
+  private Etiqueta etiqueta;
   @ManyToOne
   @JoinColumn(name = "fk_id_escenarios")
-  private Escenarios escenario;
+  private Escenario escenario;
   @ManyToOne
   @JoinColumn(name = "fk_id_estudiantestu")
-  private Estudiantes estudiante;
+  private Estudiante estudiante;
 }

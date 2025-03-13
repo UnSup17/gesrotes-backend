@@ -15,19 +15,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "GESROTES", name = "SERVICIOS")
-public class Servicios {
+@Table(schema = "GESROTES", name = "ALIMENTACIONES")
+public class Alimentacion {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "OID")
   private Long id;
 
-  @Column(name = "DESCRIPCION")
-  private String descripcion;
+  // Table that contains the bits of foods assigned to each meal record
+  @Column(name = "COMIDAS")
+  private String comidas;
 
   @ManyToOne
-  @JoinColumn(name = "ESCENARIO")
-  private Escenarios escenario;
-
+  @JoinColumn(name = "JORNADA")
+  private Jornada jornada;
 }

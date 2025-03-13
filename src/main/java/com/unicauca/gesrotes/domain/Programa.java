@@ -21,7 +21,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-public class Programas {
+public class Programa {
   @Id
   @Column(name = "OID")
   private Long id;
@@ -35,13 +35,14 @@ public class Programas {
   @ManyToOne
   @JoinColumn(name = "FACULTAD")
   @JsonManagedReference
-  private Facultades facultad;
+  private Facultad facultad;
 
   @OneToMany(mappedBy = "programa")
   @JsonBackReference
-  private List<Materias> materias;
+  private List<Asignatura> materias;
 
   @OneToMany(mappedBy = "programa")
-  private List<Estudiantes> estudiantes;
+  @JsonBackReference
+  private List<Estudiante> estudiantes;
 
 }

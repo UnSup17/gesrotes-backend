@@ -1,5 +1,7 @@
 package com.unicauca.gesrotes.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "ACADEMICO", name = "ESTUDIANTES")
-public class Estudiantes {
+public class Estudiante {
 
   @Id
   @Column(name = "OID")
@@ -25,9 +27,11 @@ public class Estudiantes {
 
   @OneToOne
   @JoinColumn(name = "TERCERO")
+  @JsonBackReference
   private Tercero tercero;
 
   @ManyToOne
   @JoinColumn(name = "PROGRAMA")
-  private Programas programa;
+  @JsonBackReference
+  private Programa programa;
 }

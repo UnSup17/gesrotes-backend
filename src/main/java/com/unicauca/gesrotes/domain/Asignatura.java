@@ -1,5 +1,7 @@
 package com.unicauca.gesrotes.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,19 +17,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "GESROTES", name = "ALIMENTACIONES")
-public class Alimentaciones {
+@Table(schema = "ACADEMICO", name = "MATERIAS")
+public class Asignatura {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "OID")
   private Long id;
 
-  // Table that contains the bits of foods assigned to each meal record
-  @Column(name = "COMIDAS")
-  private String comidas;
+  @Column(name = "CODIGO")
+  private String codigo;
+
+  @Column(name = "DESCRIPCION")
+  private String descripcion;
 
   @ManyToOne
-  @JoinColumn(name = "JORNADA")
-  private Jornadas jornada;
+  @JoinColumn(name = "PROGRAMA")
+  @JsonManagedReference
+  private Programa programa;
+
 }

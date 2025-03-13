@@ -6,29 +6,34 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-@Table(schema = "ACADEMICO", name = "FACULTADES")
 @Getter
 @Setter
-@ToString
 @Entity
-public class Facultades {
+@Table(schema = "GESROTES", name = "ESCENARIOS")
+public class Escenario {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "OID")
   private Long id;
 
-  @Column(name = "NOMBRE")
-  private String nombre;
+  @Column(name = "DESCRIPCION")
+  private String label;
 
-  @OneToMany(mappedBy = "facultad")
+  @OneToMany(mappedBy = "escenario")
   @JsonBackReference
-  private List<Programas> programas;
+  private List<Servicio> servicios;
+
+  @OneToMany(mappedBy = "escenario")
+  @JsonBackReference
+  private List<Etiqueta> etiquetas;
 
 }

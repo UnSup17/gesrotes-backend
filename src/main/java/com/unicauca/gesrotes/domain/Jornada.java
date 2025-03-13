@@ -1,8 +1,8 @@
 package com.unicauca.gesrotes.domain;
 
+import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,24 +17,30 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "GESROTES", name = "ESCENARIOS")
-public class Escenarios {
+@Table(schema = "GESROTES", name = "JORNADAS")
+public class Jornada {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "OID")
   private Long id;
 
-  @Column(name = "NOMBRE")
-  private String nombre;
+  @Column(name = "DESCRIPCION")
+  private String descripcion;
 
-  @Column(name = "DIRECCION")
-  private String direccion;
+  @Column(name = "HORAINICIO")
+  private Date horaInicio;
 
-  @OneToMany(mappedBy = "escenario", cascade = CascadeType.ALL)
-  private List<Servicios> servicios;
+  @Column(name = "HORAFIN")
+  private Date horaFin;
 
-  @OneToMany(mappedBy = "escenario", cascade = CascadeType.ALL)
-  private List<Etiquetas> etiquetas;
+  @Column(name = "DURACION")
+  private int duracion;
+
+  @Column(name = "VIGENCIA")
+  private Date vigencia;
+
+  @OneToMany(mappedBy = "jornada")
+  private List<Alimentacion> alimentaciones;
 
 }

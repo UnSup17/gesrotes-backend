@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -22,6 +23,8 @@ import lombok.Setter;
 public class Tercero {
 
   @Id
+  @Column(name = "OID")
+  private Integer id;
   private String identificacion;
   private String primernombre;
   private String segundonombre;
@@ -40,6 +43,7 @@ public class Tercero {
   private FactorRH factorRh;
 
   @OneToOne(mappedBy = "tercero")
-  private Estudiantes estudiante;
+  @JsonManagedReference
+  private Estudiante estudiante;
 
 }

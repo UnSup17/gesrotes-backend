@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.unicauca.gesrotes.dto.AsociarEtiquetaServicioRequestDTO;
 import com.unicauca.gesrotes.dto.NuevaEtiquetaRequestDTO;
 import com.unicauca.gesrotes.dto.TransactionalResponseDTO;
 import com.unicauca.gesrotes.dto.projection.EtiquetaEscenarioDTO;
+import com.unicauca.gesrotes.dto.projection.EtiquetaServicioDTO;
 import com.unicauca.gesrotes.services.EtiquetasService;
 
 @RestController
@@ -35,7 +37,8 @@ public class EtiquetasController {
   }
 
   @PostMapping("nueva")
-  public ResponseEntity<TransactionalResponseDTO<List<EtiquetaEscenarioDTO>>> nuevaEtiqueta(@RequestBody NuevaEtiquetaRequestDTO request) {
+  public ResponseEntity<TransactionalResponseDTO<List<EtiquetaEscenarioDTO>>> nuevaEtiqueta(
+      @RequestBody NuevaEtiquetaRequestDTO request) {
     return etiquetaService.crear(request);
   }
 
@@ -43,4 +46,25 @@ public class EtiquetasController {
   public ResponseEntity<TransactionalResponseDTO<List<EtiquetaEscenarioDTO>>> eliminarEtiqueta(@PathVariable Long id) {
     return etiquetaService.eliminar(id);
   }
+
+  @GetMapping("asociadas")
+  public ResponseEntity<List<EtiquetaServicioDTO>> listaAsociadas() {
+    return ResponseEntity.ok()
+        .header(HttpHeaders.ACCEPT)
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(etiquetaService.listaAsociadas());
+  }
+
+  @PostMapping("asociar")
+  public ResponseEntity<TransactionalResponseDTO<List<EtiquetaServicioDTO>>> asociarConServicio(
+      @RequestBody AsociarEtiquetaServicioRequestDTO request) {
+    return etiquetaService.asociar(request);
+  }
+
+  @DeleteMapping("{id}/desasociar")
+  public ResponseEntity<TransactionalResponseDTO<List<EtiquetaServicioDTO>>> desasociarServicio(
+      @PathVariable Long id) {
+    return etiquetaService.desasociar(id);
+  }
+
 }

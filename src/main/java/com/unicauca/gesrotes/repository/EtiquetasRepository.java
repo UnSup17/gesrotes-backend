@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.unicauca.gesrotes.domain.Etiqueta;
 import com.unicauca.gesrotes.dto.projection.EtiquetaEscenarioDTO;
+import com.unicauca.gesrotes.dto.projection.EtiquetaServicioDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -29,4 +30,22 @@ public interface EtiquetasRepository extends CrudRepository<Etiqueta, Long> {
   @Query(value = "DELETE FROM GESROTES.ETIQUETAS E WHERE E.OID = ?1", nativeQuery = true)
   int eliminar(Long id);
 
+  @Query(value = "SELECT ES.OID id, E.DESCRIPCION etiqueta, S.DESCRIPCION servicio, H.DESCRIPCION escenario "
+      +
+      "FROM GESROTES.ETIQUETASSERVICIOS ES " +
+      "JOIN GESROTES.ETIQUETAS E ON E.OID = ES.ETIQUETA " +
+      "JOIN GESROTES.SERVICIOS S ON ES.SERVICIO = S.OID " +
+      "JOIN GESROTES.ESCENARIOS H ON H.OID = S.ESCENARIO " +
+      "WHERE E.ESCENARIO = S.ESCENARIO", nativeQuery = true)
+  List<EtiquetaServicioDTO> getServiciosAsociados();
+
+  @Transactional
+  @Modifying
+  @Query(value = "INSERT INTO GESROTES.ETIQUETASSERVICIOS (ETIQUETA,SERVICIO) VALUES (?1, ?2)", nativeQuery = true)
+  int asociar(Long etiqueta, Long servicio);
+
+  @Transactional
+  @Modifying
+  @Query(value = "DELETE FROM GESROTES.ETIQUETASSERVICIOS E WHERE E.OID = ?1", nativeQuery = true)
+  int desasociar(Long id);
 }

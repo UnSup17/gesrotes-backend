@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.unicauca.gesrotes.dto.AsociarEtiquetaServicioRequestDTO;
 import com.unicauca.gesrotes.dto.NuevaEtiquetaRequestDTO;
 import com.unicauca.gesrotes.dto.TransactionalResponseDTO;
 import com.unicauca.gesrotes.dto.projection.EtiquetaEscenarioDTO;
+import com.unicauca.gesrotes.dto.projection.EtiquetaServicioDTO;
 import com.unicauca.gesrotes.repository.EtiquetasRepository;
 import com.unicauca.gesrotes.util.Response;
 
@@ -25,28 +27,63 @@ public class EtiquetasService {
 
   public ResponseEntity<TransactionalResponseDTO<List<EtiquetaEscenarioDTO>>> crear(NuevaEtiquetaRequestDTO request) {
     try {
-        int result = etiquetaRepository.crear(request.etiqueta(), request.escenario());
-        if (result > 0) {
-            return Response.buildResponse(HttpStatus.OK, "Ok", getListaEtiquetaEscenario());
-        }
+      int result = etiquetaRepository.crear(request.etiqueta(), request.escenario());
+      if (result > 0) {
+        return Response.buildResponse(HttpStatus.OK, "Ok", getListaEtiquetaEscenario());
+      }
     } catch (Exception e) {
-        String causa = e.getCause().toString().indexOf(".UQ_") > 0 ? "Ya existe una etiqueta con ese nombre" : e.getMessage();
-        return Response.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, causa, null);
+      String causa = e.getCause().toString().indexOf(".UQ_") > 0 ? "Ya existe una etiqueta con ese nombre"
+          : e.getMessage();
+      return Response.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, causa, null);
     }
     return Response.buildResponse(HttpStatus.NOT_MODIFIED, "No se logró la creación de la etiqueta", null);
-}
+  }
 
   public ResponseEntity<TransactionalResponseDTO<List<EtiquetaEscenarioDTO>>> eliminar(Long id) {
     try {
       int result = etiquetaRepository.eliminar(id);
       if (result > 0) {
-          return Response.buildResponse(HttpStatus.OK, "Ok", getListaEtiquetaEscenario());
+        return Response.buildResponse(HttpStatus.OK, "Ok", getListaEtiquetaEscenario());
       }
-  } catch (Exception e) {
-      String causa = e.getCause().toString().indexOf(".UQ_") > 0 ? "Ya existe una etiqueta con ese nombre" : e.getMessage();
+    } catch (Exception e) {
+      String causa = e.getCause().toString().indexOf(".UQ_") > 0 ? "Ya existe una etiqueta con ese nombre"
+          : e.getMessage();
       return Response.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, causa, null);
+    }
+    return Response.buildResponse(HttpStatus.NOT_MODIFIED, "No se logró la creación de la etiqueta", null);
   }
-  return Response.buildResponse(HttpStatus.NOT_MODIFIED, "No se logró la creación de la etiqueta", null);
+
+  public List<EtiquetaServicioDTO> listaAsociadas() {
+    return etiquetaRepository.getServiciosAsociados();
+  }
+
+  public ResponseEntity<TransactionalResponseDTO<List<EtiquetaServicioDTO>>> asociar(
+      AsociarEtiquetaServicioRequestDTO request) {
+    try {
+      int result = etiquetaRepository.asociar(request.etiqueta(), request.servicio());
+      if (result > 0) {
+        return Response.buildResponse(HttpStatus.OK, "Ok", listaAsociadas());
+      }
+    } catch (Exception e) {
+      String causa = e.getCause().toString().indexOf(".UQ_") > 0 ? "Ya existe esta asociación"
+          : e.getMessage();
+      return Response.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, causa, null);
+    }
+    return Response.buildResponse(HttpStatus.NOT_MODIFIED, "No se logró asociar la etiqueta con el servicio", null);
+  }
+
+  public ResponseEntity<TransactionalResponseDTO<List<EtiquetaServicioDTO>>> desasociar(Long id) {
+    try {
+      int result = etiquetaRepository.desasociar(id);
+      if (result > 0) {
+        return Response.buildResponse(HttpStatus.OK, "Ok", listaAsociadas());
+      }
+    } catch (Exception e) {
+      String causa = e.getCause().toString().indexOf(".UQ_") > 0 ? "Ya existe una etiqueta con ese nombre"
+          : e.getMessage();
+      return Response.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, causa, null);
+    }
+    return Response.buildResponse(HttpStatus.NOT_MODIFIED, "No se logró la creación de la etiqueta", null);
   }
 
 }

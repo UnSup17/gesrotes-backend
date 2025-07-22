@@ -22,8 +22,8 @@ public class EstudiantesController {
   private EstudiantesService estudianteService;
 
   @GetMapping("")
-  public ResponseEntity<List<EstudianteSeleccionTurnosDTO>> get(@Param("asignatura") Long asignatura) {
-    return Response.buildGetResponse(HttpStatus.OK, estudianteService.getByAsignaturaId(asignatura));
+  public ResponseEntity<List<EstudianteSeleccionTurnosDTO>> get(@Param("grupo") Long grupo) {
+    return Response.buildGetResponse(HttpStatus.OK, estudianteService.getByGrupoId(grupo));
   }
 
 }

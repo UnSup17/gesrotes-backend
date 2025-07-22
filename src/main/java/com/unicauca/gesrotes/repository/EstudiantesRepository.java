@@ -11,14 +11,16 @@ import com.unicauca.gesrotes.dto.projection.EstudianteSeleccionTurnosDTO;
 
 public interface EstudiantesRepository extends CrudRepository<Estudiante, Long> {
 
-  @Query(value = "SELECT e.oid id, g2.SELECCIONGESROTES isSelected, " +
-        "t.PRIMERNOMBRE || ' ' || t.SEGUNDONOMBRE || ' ' || t.PRIMERAPELLIDO || ' ' || t.SEGUNDOAPELLIDO fullName  " +
-        "FROM GRUPOSCLASE g  " +
-        "JOIN GRUPOSESTUDIANTES g2 ON g.oid = g2.GRUPO " +
-        "JOIN ESTUDIANTES e ON e.oid = g2.ESTUDIANTE  " +
-        "JOIN TERCEROS t ON t.oid = e.TERCERO  " +
-        "WHERE g.MATERIA = :asignaturaId AND g.PERIODO = :periodoId " +
-        "ORDER BY g.PERIODO DESC", nativeQuery = true)
-  List<EstudianteSeleccionTurnosDTO> getMenuByPrograma(@Param("asignaturaId") Long asignaturaId, @Param("periodoId") Long periodoId);
+  @Query(value = """
+      SELECT e.oid id, g2.SELECCIONGESROTES isSelected,
+      t.PRIMERNOMBRE || ' ' || t.SEGUNDONOMBRE || ' ' || t.PRIMERAPELLIDO || ' ' || t.SEGUNDOAPELLIDO fullName
+      FROM GRUPOSCLASE g
+      JOIN GRUPOSESTUDIANTES g2 ON g.oid = g2.GRUPO
+      JOIN ESTUDIANTES e ON e.oid = g2.ESTUDIANTE
+      JOIN TERCEROS t ON t.oid = e.TERCERO
+      WHERE g.oid = :grupoId AND g.PERIODO = :periodoId
+      ORDER BY g.PERIODO DESC""", nativeQuery = true)
+  List<EstudianteSeleccionTurnosDTO> getMenuByGrupo(@Param("grupoId") Long grupoId,
+      @Param("periodoId") Long periodoId);
 
 }

@@ -31,12 +31,17 @@ public class EtiquetasService {
       if (result > 0) {
         return Response.buildResponse(HttpStatus.OK, "Ok", getListaEtiquetaEscenario());
       }
+      return Response.buildResponse(HttpStatus.NOT_MODIFIED, "No se logró la creación de la etiqueta", null);
     } catch (Exception e) {
-      String causa = e.getCause().toString().indexOf(".UQ_") > 0 ? "Ya existe una etiqueta con ese nombre"
-          : e.getMessage();
-      return Response.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, causa, null);
+      String message = e.getMessage();
+
+      if (message != null && message.contains("ORA-00001")) {
+        message = "Ya existe una etiqueta con ese nombre";
+      }
+
+      return Response.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, message != null ? message : "Error inesperado",
+          null);
     }
-    return Response.buildResponse(HttpStatus.NOT_MODIFIED, "No se logró la creación de la etiqueta", null);
   }
 
   public ResponseEntity<TransactionalResponseDTO<List<EtiquetaEscenarioDTO>>> eliminar(Long id) {
@@ -45,12 +50,17 @@ public class EtiquetasService {
       if (result > 0) {
         return Response.buildResponse(HttpStatus.OK, "Ok", getListaEtiquetaEscenario());
       }
+      return Response.buildResponse(HttpStatus.NOT_MODIFIED, "No se logró la eliminación de la etiqueta", null);
     } catch (Exception e) {
-      String causa = e.getCause().toString().indexOf(".UQ_") > 0 ? "Ya existe una etiqueta con ese nombre"
-          : e.getMessage();
-      return Response.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, causa, null);
+      String message = e.getMessage();
+
+      if (message != null && message.contains("ORA-02292")) {
+        message = "Elimine primero los servicios asociados a esta etiqueta";
+      }
+
+      return Response.buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, message != null ? message : "Error inesperado",
+          null);
     }
-    return Response.buildResponse(HttpStatus.NOT_MODIFIED, "No se logró la creación de la etiqueta", null);
   }
 
   public List<EtiquetaServicioDTO> listaAsociadas() {

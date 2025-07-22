@@ -18,9 +18,9 @@ public class EstudiantesService {
   @Autowired
   private PeriodosService periodoService;
 
-  public List<EstudianteSeleccionTurnosDTO> getByAsignaturaId(Long asignaturaId) {
+  public List<EstudianteSeleccionTurnosDTO> getByGrupoId(Long grupoId) {
     Periodo periodo = periodoService.getUltimoPeriodo();
-    return estudianteRepository.getMenuByPrograma(asignaturaId, periodo.getId());
+    return estudianteRepository.getMenuByGrupo(grupoId, periodo.getId());
   }
   
 }

@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.unicauca.gesrotes.domain.Escenario;
+import com.unicauca.gesrotes.domain.Jornada;
 
-public interface EscenariosRepository extends CrudRepository<Escenario, Long> {
+public interface JornadasRepository extends CrudRepository<Jornada, Long> {
 
   @SuppressWarnings("null")
-  List<Escenario> findAll();
+  List<Jornada> findAll();
 
 }

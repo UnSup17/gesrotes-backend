@@ -1,6 +1,7 @@
 package com.unicauca.gesrotes.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unicauca.gesrotes.domain.Servicio;
+import com.unicauca.gesrotes.dto.ServicioDTO;
 import com.unicauca.gesrotes.services.ServiciosService;
 import com.unicauca.gesrotes.util.Response;
 
@@ -24,6 +26,15 @@ public class ServiciosController {
   @GetMapping("")
   public ResponseEntity<List<Servicio>> get(@Param("escenario") Long escenario) {
     return Response.buildGetResponse(HttpStatus.OK, servicioService.getByEscenario(escenario));
+  }
+
+  @GetMapping("/mapa")
+  public ResponseEntity<?> obtenerServiciosAgrupados() {
+    Map<Long, List<ServicioDTO>> agrupados = servicioService.getServiciosAgrupadosPorEscenario();
+    return ResponseEntity.ok(Map.of(
+        "ok", true,
+        "message", "Servicios agrupados por escenario",
+        "data", agrupados));
   }
 
 }

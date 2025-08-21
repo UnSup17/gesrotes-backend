@@ -1,0 +1,142 @@
+{"properties": [
+  {
+    "name": "spring.ldap.url",
+    "type": "java.lang.String",
+    "description": "the ldap server url"
+  },
+  {
+    "name": "spring.ldap.port",
+    "type": "java.lang.String",
+    "description": "the ldap server port"
+  },
+  {
+    "name": "spring.ldap.userDnPatterns",
+    "type": "java.lang.String",
+    "description": "ldap Dn pattern to search for"
+  },
+  {
+    "name": "spring.ldap.userSearchFilter",
+    "type": "java.lang.String",
+    "description": "ldap search filter to search users on log in"
+  },
+  {
+    "name": "spring.ldap.groupSearchBase",
+    "type": "java.lang.String",
+    "description": "ldap base for search in a group"
+  },
+  {
+    "name": "spring.ldap.groupSearchFilter",
+    "type": "java.lang.String",
+    "description": "ldap search filter to search groups"
+  },
+  {
+    "name": "spring.ldap.manager.dn",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.ldap.manager.Dn'"
+  },
+  {
+    "name": "spring.ldap.manager.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.ldap.manager.password'"
+  },
+  {
+    "name": "jwt.key",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.key'"
+  },
+  {
+    "name": "jwt.time.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.time.expiration'"
+  },
+  {
+    "name": "cors.mapping",
+    "type": "java.lang.String",
+    "description": "cors.mapping"
+  },
+  {
+    "name": "cors.allowed-origins",
+    "type": "java.lang.String",
+    "description": "allowed-origins"
+  },
+  {
+    "name": "cors.allowed-headers",
+    "type": "java.lang.String",
+    "description": "A description for 'cors.allowed-headers'"
+  },
+  {
+    "name": "cors.allowed-methods",
+    "type": "java.lang.String",
+    "description": "A description for 'cors.allowed-methods'"
+  },
+  {
+    "name": "app.version",
+    "type": "java.lang.String",
+    "description": "app.version"
+  },
+  {
+    "name": "spring.datasource.jdbc-url",
+    "type": "java.lang.String",
+    "description": "url for simca db connection"
+  },
+  {
+    "name": "spring.datasource.simca.driver-class-name",
+    "type": "java.lang.String",
+    "description": "driver for SIMCA DB conection"
+  },
+  {
+    "name": "spring.datasource.simca.password",
+    "type": "java.lang.String",
+    "description": "password for SIMCA DB conection"
+  },
+  {
+    "name": "spring.datasource.simca.username",
+    "type": "java.lang.String",
+    "description": "username for SIMCA DB conection"
+  },
+  {
+    "name": "spring.datasource.fpl.jdbc-url",
+    "type": "java.lang.String",
+    "description": "url for FPL DB connection"
+  },
+  {
+    "name": "spring.datasource.fpl.driver-class-name",
+    "type": "java.lang.String",
+    "description": "driver for FPL DB conection"
+  },
+  {
+    "name": "spring.datasource.fpl.password",
+    "type": "java.lang.String",
+    "description": "password for FPL DB conection"
+  },
+  {
+    "name": "spring.datasource.fpl.username",
+    "type": "java.lang.String",
+    "description": "username for FPL DB conection"
+  },
+  {
+    "name": "armatura.url",
+    "type": "java.lang.String",
+    "description": "url for armatura api"
+  },
+  {
+    "name": "armatura.token",
+    "type": "java.lang.String",
+    "description": "token for armatura api"
+  },
+  {
+    "name": "paccman.url",
+    "type": "java.lang.String",
+    "description": "url for paccman api"
+  },
+  {
+    "name": "paccman.key",
+    "type": "java.lang.String",
+    "description": "key for paccman api"
+  },
+  {
+    "name": "face.api.url",
+    "type": "java.lang.String",
+    "description": "url from docker compose to connect faceRecon api"
+  }
+]}

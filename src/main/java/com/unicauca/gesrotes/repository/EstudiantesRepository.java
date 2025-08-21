@@ -12,7 +12,7 @@ import com.unicauca.gesrotes.dto.projection.EstudianteSeleccionTurnosDTO;
 public interface EstudiantesRepository extends CrudRepository<Estudiante, Long> {
 
   @Query(value = """
-      SELECT e.oid id, g2.SELECCIONGESROTES isSelected,
+      SELECT e.oid id, 1 isSelected,
       t.PRIMERNOMBRE || ' ' || t.SEGUNDONOMBRE || ' ' || t.PRIMERAPELLIDO || ' ' || t.SEGUNDOAPELLIDO fullName
       FROM GRUPOSCLASE g
       JOIN GRUPOSESTUDIANTES g2 ON g.oid = g2.GRUPO
